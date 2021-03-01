@@ -1,0 +1,9 @@
+Hi $name,
+
+Here is the latest game update:
+
+$update_content
+
+Good luck!
+Senior Elimination 2020
+

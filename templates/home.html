@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="accordion my-4" id="alertAccordion">
+                    {% for update in game_updates %}
+                        <div class="card bg-info">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-outline-light" type="button" data-toggle="collapse"
+                                            data-target="#collapse{{ loop.index0 }}"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                        {{ render_date(update.created_at, 'l n/j \\a\\t g:i A') }}
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapse{{ loop.index0 }}" class="collapse {% if loop.first %}show{% endif %}"
+                                 aria-labelledby="headingOne"
+                                 data-parent="#alertAccordion">
+                                <div class="card-body">
+                                    {{ update.text|safe }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% for notification in notifications %}
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <b>{{ render_date(notification.elimination.created_at, 'g:i A') }}</b>
+                        - {{ notification.elimination.eliminator.first_name }} {{ notification.elimination.eliminator.last_name }}
+                        eliminated {{ notification.elimination.target.first_name }} {{ notification.elimination.target.last_name }}!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                {% if request.user.is_authenticated %}
+                    <h5 class='text-center'>Welcome {{ request.user.first_name }}</h5>
+                    <hr class="bg-white">
+                {% endif %}
+                <h1 class="text-center mt-4">Seniors Remaining: {{ seniors_left }}</h1>
+                <hr class="bg-white">
+                {% if seniors|length > 0 %}
+                    <h1 class="text-center mt-4">Leaderboard</h1>
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col"># of Eliminations</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for senior in seniors %}
+                            {% if senior.elimination is not none %}
+                                <tr class='text-muted'>
+                                    {% else %}
+                                <tr>
+                            {% endif %}
+                        <th scope="row">{{ senior.count }}</th>
+                        <td>{{ senior.first_name }}</td>
+                        <td>{{ senior.last_name }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+                {% if data %}
+                    <h3 class="text-center mt-5">Seniors Left</h3>
+                    <canvas id="chart"></canvas>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script>
+        {% if data %}
+            let chart = new Chart(document.getElementById('chart'), {
+                type: 'line',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        label: 'Seniors Left',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: {{ data|safe }}
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    animation: {
+                        duration: 4000
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            },
+                            gridLines: {
+                                color: "lightgray"
+                            },
+                            ticks: {
+                                fontColor: "white",
+                                fontSize: 18,
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                color: "lightgray"
+                            },
+                            ticks: {
+                                fontColor: "white",
+                                fontSize: 18,
+                                precision: 0
+                            },
+                        }]
+                    }
+                }
+            });
+        {% endif %}
+    </script>
+{% endblock scripts %}

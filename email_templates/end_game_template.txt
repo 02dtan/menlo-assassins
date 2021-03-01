@@ -1,0 +1,11 @@
+Hi $name,
+
+After a long senior-elimination season, we are finally ready to announce our winners!
+
+Congratulations!
+---------------------
+$winners
+---------------------
+
+Thanks for playing!
+Senior Elimination 2020

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% from 'form.html' import render_form with context %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <h2>Change Mail Settings</h2>
+                <form method="post">
+                    <input type='hidden' name='csrfmiddlewaretoken' value={{ csrf_token }}>
+                    {{ render_form(form) }}
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

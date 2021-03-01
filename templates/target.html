@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% from 'form.html' import render_form with context %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col text-center">
+                {% if request.user.check_password(request.user.initial_password) %}
+                    <h1 class="display-3">Please change your password!</h1>
+                    <hr style="background-color: white">
+                    <h3>You have not since initial ones were given.</h3>
+                    <p>All passwords are hashed for security.</p>
+                {% else %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h4>{{ message }}</h4>
+                        {% endfor %}
+                    {% endif %}
+                    {% if request.user.target %}
+                        <div id="viewAccordion">
+                            <div class="card border border-primary bg-dark m-2">
+                                <div class="card-header" id="viewHeading">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-lg btn-link text-primary" type="button"
+                                                data-toggle="collapse"
+                                                data-target="#viewCollapse" aria-expanded="true"
+                                                aria-controls="viewCollapse">
+                                            View Target
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="viewCollapse" class="collapse" aria-labelledby="viewHeading"
+                                     data-parent="#viewAccordion">
+                                    <div class="card-body">
+                                        <h1 class="m-5">{{ request.user.target.first_name }} {{ request.user.target.last_name }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border border-danger bg-dark m-2">
+                                <div class="card-header" id="eliminateHeading">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-lg btn-link text-danger" type="button"
+                                                data-toggle="collapse"
+                                                data-target="#eliminateCollapse" aria-expanded="true"
+                                                aria-controls="eliminateCollapse">
+                                            Eliminate Target
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="eliminateCollapse"
+                                     class="collapse {% if request.method == 'POST' %} show{% endif %}"
+                                     aria-labelledby="eliminateHeading"
+                                     data-parent="#viewAccordion">
+                                    <div class="card-body">
+                                        <form method="post">
+                                            <input type='hidden' name='csrfmiddlewaretoken' value={{ csrf_token }}>
+                                            {{ render_form(form) }}
+                                            <button type="submit" class="btn btn-danger">Eliminate</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border border-info bg-dark m-2">
+                                <div class="card-header" id="secretHeading">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-lg btn-link text-info" type="button"
+                                                data-toggle="collapse"
+                                                data-target="#secretCollapse" aria-expanded="true"
+                                                aria-controls="secretCollapse">
+                                            View My Secret Number
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="secretCollapse" class="collapse" aria-labelledby="secretHeading"
+                                     data-parent="#viewAccordion">
+                                    <div class="card-body">
+                                        <h1 class="m-5">{{ request.user.secret_number }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif request.user.elimination is undefined %}
+                        <h1>Waiting to start game.</h1>
+                    {% else %}
+                        <h1>Eliminated :(</h1>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

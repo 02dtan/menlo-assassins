@@ -1,0 +1,20 @@
+Hi $name,
+
+Welcome to senior elimination.
+
+Your username is $student_id
+Your password is $initial_password
+
+If the email address we contacted you at is inconvenient, you can change it once you log in. Emails will be used to communicate new info (reshuffling targets, game updates). If you are eliminated, you can unsubscribe to our messages.
+
+Please read over the elimination rules: https://docs.google.com/document/d/1LLBOWMnUEfSuoiOXBuWZWO_HInHdLkguzK_IevMq5zQ
+
+Sign into your elimination account at https://senior-elimination.herokuapp.com/login
+
+Changing your password is highly recommended. They are hashed, not stored in clear text (aka we can't see what your password is) so do not worry.
+
+Shortly, you will receive an email with your first target
+
+Have fun!
+
+Best, Senior Elimination 2020

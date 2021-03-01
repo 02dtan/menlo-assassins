@@ -1,0 +1,8 @@
+Hi $name,
+
+Your target has been changed to: $target.
+
+You must now also hold the ball to the top of your head to be considered safe.
+
+Happy hunting!
+Senior Elimination 2020

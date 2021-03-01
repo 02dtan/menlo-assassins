@@ -1,0 +1,1 @@
+web: gunicorn senior_elimination.wsgi --log-file -
