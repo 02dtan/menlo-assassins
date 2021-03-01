@@ -14,6 +14,10 @@
     <div class='collapse navbar-collapse' id='navbarNavDropdown'>
         <ul class='navbar-nav mr-auto'>
             {{ nav_link('Home', 'home') }}
+            <li class="nav-item">
+                <a class="nav-link text-info text-decoration-underline"
+                   href="https://github.com/qhdwight/senior-elimination" target="_blank"><i class="fa fa-github-alt mx-2"></i></a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}

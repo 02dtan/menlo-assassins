@@ -5,4 +5,4 @@ import send_email
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        send_email.send_reassign_targets()
+        send_email.send_initial_passwords()
