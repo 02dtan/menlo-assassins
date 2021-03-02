@@ -16,3 +16,9 @@ Django backend, Jinja2 + Bootstrap, Heroku for hosting
 ### Screenshot
 
 ![Screenshot](screenshot.png)
+
+### Load
+
+Captured during the 2020 season
+
+![Load](load.png)
