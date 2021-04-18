@@ -1,18 +1,22 @@
 Hi $name,
 
-Welcome to senior elimination!
+Welcome to Assassins!
+
+If you received two emails from me, please disregard the first one. I ran a script that included Paly's login link and rules. Do not use that or log in there, it will not work.
 
 Your login username is $student_id
 Your initial password is $initial_password
 
-Please read over the elimination rules: https://docs.google.com/document/d/1xWD0SQH25xMXrQdbE5S6ooltYU8aEB73XvSna1mZH2Q
+Please read over the rules here: https://docs.google.com/document/d/1_cmoWj-DkF0274RE5pxUxzs6_pJi3pW1vpk_VshQWDw/edit
 
-Sign into your elimination account at https://senior-elimination-2021-u.herokuapp.com/login
+There is a shorter version of the rules and safe zones here, for reference: https://docs.google.com/document/d/14qaXLkfrHLa6Ldm5WMCV4qxEvIbjIhZLXOnDLpsS28M/edit?usp=sharing
+
+Sign into your elimination account at https://menlo-assassins.herokuapp.com/login
 
 Changing your password is highly recommended. They are hashed, not stored in clear text (aka we can't see what your password is) so do not worry.
 
-Shortly, your first target will be revealed on the site!
+We will release targets at ~8 am on Tuesday, April 20th, and remember that the game starts at 9am so you are safe before first period starts, at least.
 
 Have fun!
 
-Best, Senior Elimination 2021
+Best, Menlo Spirit Team
