@@ -177,5 +177,5 @@ staticfiles/
 
 # Sensitive
 
-seniors.csv
+students.csv
 initial_passwords.csv

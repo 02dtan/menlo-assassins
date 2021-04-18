@@ -14,9 +14,6 @@ EMAIL_PASSWORD = config('EMAIL_PASSWORD')
 
 
 def send_initial_passwords():
-    initial_passwords = {line.split(",")[0]: line.split(",")[1] for line in
-                         open("initial_passwords.csv", "r").readlines()}
-
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.login(EMAIL, EMAIL_PASSWORD)
     seniors = tqdm(list(Senior.objects.filter(is_superuser=False)))
@@ -25,7 +22,7 @@ def send_initial_passwords():
             message = MIMEMultipart()
             template = Template(open('email_templates/initial_template.txt').read())
             content = template.substitute(name=senior.first_name, student_id=senior.username,
-                                          initial_password=initial_passwords[senior.username])
+                                          initial_password=senior.initial_password)
             message['From'] = EMAIL
             message['To'] = senior.email
             message['Subject'] = 'Senior Elimination - Initial Account Information'
